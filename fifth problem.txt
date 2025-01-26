@@ -1,0 +1,15 @@
+file<-read.csv("C:\\Users\\DELL G3\\Desktop\\project.csv",stringsAsFactors = FALSE)
+number_of_transaction<-length(file$items)
+number_of_transaction
+item<-strsplit(as.vector(file$items), ',')
+products<-unique(unlist(item))
+products
+minsupport<-as.numeric(readline("enter minimum support between 0.001 and 1"))
+if(minsupport>1&minsupport<0.001)
+  print("invaild input")
+minconfidence<-as.numeric(readline("enter minimum confidence between 0.001 and 1"))
+if(minconfidence>1&minconfidence<0.001)
+  print("invaild input")
+x<-as(item,"transactions")
+rules<-apriori(x,parameter = list(supp=minsupport,conf=minsupport,minlen=2))
+q<-inspect(rules)

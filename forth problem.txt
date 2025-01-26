@@ -1,0 +1,15 @@
+View(file)
+print(file).
+x<-cbind(file$total,file$age)
+y<-cbind(x,file$customer)
+n<-as.numeric(readline("Enter the number of centers between 2 and 4 only  "))
+if (n>=2&n<=4){
+z<-kmeans(x,centers = n)
+f<-z$cluster
+print(f)
+print(z)
+v<-cbind(y,f)
+v<-data.frame(v)
+print(v)
+View(v)
+}

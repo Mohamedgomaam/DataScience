@@ -1,0 +1,24 @@
+file<-read.csv("C:\\Users\\DELL G3\\Desktop\\project.csv")
+str(file)
+o<-cbind(file[,1],file[,3],file[,5],file[,6],file[,7],file[,8])
+x<-table(file$paymentType)
+print(x)
+names <- c("Cash","Credit")
+pct=round(x/sum(x)*100)
+new_labels=paste(names,"-",pct,"%",sep = "")
+pie(x,labels = new_labels,main ="Comparsion between payment types",col=rainbow(2)) 
+e<-group_by(file,age)
+s<-summarise(e,total=sum(total))
+print(s)
+plot(s,main="Money spent by each age group")
+f<-group_by(file,city)
+z<-summarise(f,TOTAL=sum(total))
+print(z)
+df <- z[order(z$TOTAL,decreasing = FALSE),]
+barplot(df$TOTAL,names.arg = df$city,horiz = TRUE,las=1,main="Total money spent by each city")
+boxplot(
+  x=file$total,
+  main="Display the distribution of total spending",
+  xlap="total" , horizontal = TRUE
+)
+par(mfrow=c(2,2))
